@@ -20,6 +20,44 @@ with open(file) as input_file:
                 continue
 
 sorted_content = sorted(content)
+			
+
+def quartile():
+	if len(content)%2 == 1:
+		index = (len(content)-1) // 2 #from formula it is +1 but indexes starts
+		#from 0. So its used as -1 her
+		median = sorted_content[index]
+
+	else:
+		index = len(content)//2
+		median = (sorted_content[index] +  sorted_content[index-1]) / 2
+
+	q1 = []
+	q3 = []
+	for element in sorted_content:
+		if element < median:
+			q1.append(element)
+		elif element>median:
+			q3.append(element)
+	if len(q1)%2 == 0:
+		index = len(q1) // 2
+		q1 = (q1[index]+q1[index-1]) / 2
+		print("First quartile = {}\n\n".format(q1))
+	else:
+		index = (len(q1) -1) //2
+		q1 = q1[index]
+		print("First quartile = {}\n\n".format(q1))
+	if len(q3)%2 == 0:
+		index = len(q3) // 2
+		q3 = (q3[index]+q3[index-1]) / 2
+		print("Third quartile = {}\n\n".format(q3))
+	else:
+		index = (len(q3) -1) //2
+		q3 = q3[index]
+		print("First quartile = {}\n\n".format(q3))
+	
+		
+
 def mean():
     mean = 0
     for element in content:
@@ -27,11 +65,13 @@ def mean():
     mean = mean / len(content)
     print("Mean = {}\n\n\n".format(mean))
 
-def median():
+def median_calc():
+
     if len(content)%2 == 1:
         index = (len(content)-1) // 2 #from formula it is +1 but indexes starts
                                       #from 0. So its used as -1 here
-        print("Median = {}\n\n\n".format(sorted_content[index]))
+        median = sorted_content[index]
+        print("Median = {}\n\n\n".format(median))
 
     else:
         index = len(content)//2
@@ -137,7 +177,8 @@ __________________________________________________________
             print("{}*|{}".format(stem, star_leaves))
 
 mode()
-median()
+median_calc()
+quartile()
 mean()
 variance()
 std_deviation()
